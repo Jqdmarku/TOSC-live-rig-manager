@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h5 class="mb-0">Edit Combi</h5>
+  <a href="/" class="btn btn-sm btn-outline-secondary">Back to List</a>
+</div>
+
+<form action="/edit/{{ combi.id }}" method="post">
+  <div class="card p-4 mb-4">
+
+    <div class="mb-4">
+      <label class="form-label small text-muted text-uppercase" style="letter-spacing:.06em">Patch Name</label>
+      <input type="text" class="form-control" name="name"
+             value="{{ combi.name }}" required>
+    </div>
+
+    <hr class="border-secondary">
+
+    <p class="small text-muted mb-3">24 item slots — leave empty to export as blank string.</p>
+
+    <div class="row g-3">
+      {% for item in items %}
+      <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+        <label class="slot-label d-block mb-1">{% if item.position < 16 %}FADER {{ '%02d' % (item.position + 1) }}{% else %}BUTTON {{ item.position - 15 }}{% endif %}</label>
+        <input type="text"
+               class="form-control form-control-sm"
+               name="item_{{ item.position }}"
+               value="{{ item.label }}"
+               placeholder="—">
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="mt-4 d-flex gap-2">
+      <button type="submit" class="btn btn-accent">Save Changes</button>
+      <a href="/" class="btn btn-outline-secondary">Cancel</a>
+    </div>
+
+  </div>
+</form>
+{% endblock %}
