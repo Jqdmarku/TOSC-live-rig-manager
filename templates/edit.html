@@ -16,11 +16,13 @@
 
     <hr class="border-secondary">
 
-    <p class="small text-muted mb-3">24 item slots — leave empty to export as blank string.</p>
+    <p class="small text-muted mb-3">24 item slots — leave empty to export as numeric placeholder.</p>
 
-    <div class="row g-3">
-      {% for item in items %}
-      <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+    {% for group in [('Faders 1–8', items[0:8]), ('Faders 9–16', items[8:16]), ('Buttons 1–8', items[16:24])] %}
+    <p class="slot-label mb-2 mt-3">{{ group[0] }}</p>
+    <div class="row g-2 row-cols-4 row-cols-md-8">
+      {% for item in group[1] %}
+      <div class="col">
         <label class="slot-label d-block mb-1">{% if item.position < 16 %}FADER {{ '%02d' % (item.position + 1) }}{% else %}BUTTON {{ item.position - 15 }}{% endif %}</label>
         <input type="text"
                class="form-control form-control-sm"
@@ -30,6 +32,7 @@
       </div>
       {% endfor %}
     </div>
+    {% endfor %}
 
     <div class="mt-4 d-flex gap-2">
       <button type="submit" class="btn btn-accent">Save Changes</button>
