@@ -63,6 +63,15 @@
         <button type="submit" class="btn btn-outline-light w-100">Import</button>
       </form>
     </div>
+
+    <div class="card p-4 mt-3 border-danger">
+      <h6 class="mb-1 text-danger">Danger Zone</h6>
+      <p class="small text-muted mb-3">Permanently deletes all combis and items.</p>
+      <form action="/purge" method="post"
+            onsubmit="return confirm('This will permanently delete ALL combis and cannot be undone.\n\nAre you sure?')">
+        <button type="submit" class="btn btn-danger w-100">Purge All Data</button>
+      </form>
+    </div>
   </div>
 
 </div>

@@ -109,6 +109,16 @@ def delete(combi_id):
     return redirect(url_for('index'))
 
 
+@app.route('/purge', methods=['POST'])
+def purge():
+    db = get_db()
+    db.execute('DELETE FROM combi_items')
+    db.execute('DELETE FROM combis')
+    db.commit()
+    db.close()
+    return redirect(url_for('index'))
+
+
 @app.route('/import', methods=['POST'])
 def import_json():
     f = request.files.get('file')
