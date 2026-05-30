@@ -5,7 +5,8 @@ from flask import Flask, render_template, request, redirect, url_for, Response
 
 app = Flask(__name__)
 
-DATABASE = os.environ.get('DATABASE_PATH', os.path.join(os.path.dirname(__file__), 'combis.db'))
+DATABASE = os.environ.get('DATABASE_PATH', os.path.join(os.path.dirname(os.path.abspath(__file__)), 'combis.db'))
+os.makedirs(os.path.dirname(os.path.abspath(DATABASE)), exist_ok=True)
 
 
 def get_db():
