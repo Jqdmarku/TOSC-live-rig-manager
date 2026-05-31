@@ -43,7 +43,7 @@ init_db()
 @app.route('/')
 def index():
     db = get_db()
-    combis = db.execute('SELECT * FROM combis ORDER BY position, name').fetchall()
+    combis = db.execute('SELECT * FROM combis ORDER BY name COLLATE NOCASE').fetchall()
     db.close()
     return render_template('index.html', combis=combis)
 
